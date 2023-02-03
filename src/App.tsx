@@ -1,10 +1,10 @@
 import FormBooking from './components/FormBooking/FormBooking';
 
-import './App.css';
+import styles from './App.module.css';
 
-const App = () => {
+const App = (): JSX.Element => {
 	return (
-		<div className="App">
+		<div className={styles.app}>
 			<FormBooking />
 		</div>
 	);

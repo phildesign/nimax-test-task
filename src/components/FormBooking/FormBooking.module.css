@@ -1,3 +1,183 @@
 .formBooking {
-	border: 1px solid;
+	padding: 50px 0;
+}
+
+.title {
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 32px;
+	color: #000000;
+	margin-bottom: 8px;
+}
+
+.subtitle {
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 22px;
+	color: #000000;
+	margin-bottom: 24px;
+}
+
+.row {
+	min-height: 32px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	align-items: center;
+	margin-bottom: 24px;
+}
+
+.rowAlignBaseline {
+	align-items: baseline;
+}
+
+.label {
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 19px;
+	color: #000000;
+}
+
+.labelRadio {
+	position: relative;
+	padding-left: 26px;
+}
+
+.labelRadio::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #000;
+	border-radius: 100px;
+	margin: auto;
+}
+
+.labelRadio::after {
+	display: none;
+	content: '';
+	position: absolute;
+	top: 6px;
+	left: 4px;
+	bottom: 0;
+	width: 8px;
+	height: 8px;
+	background: #000;
+	border-radius: 100px;
+}
+
+.radioGroupBox {
+	display: grid;
+	gap: 10px;
+}
+
+.radioGroup {
+	display: flex;
+	align-items: center;
+}
+
+.input {
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 18px;
+	color: #000000;
+	background: #ffffff;
+	border: 1px solid #e5e7eb;
+	border-radius: 4px;
+	padding: 6px 8px;
+}
+
+.inputRadio {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.inputRadio:checked + .labelRadio::after {
+	display: block;
+}
+
+.inputInsuranceCheckbox {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+}
+
+.labelInsuranceCheckbox {
+	position: relative;
+}
+
+.labelInsuranceCheckbox::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #000000;
+	border-radius: 2px;
+	margin: auto;
+}
+
+.labelInsuranceCheckbox::after {
+	display: none;
+	content: '';
+	position: absolute;
+	top: -6px;
+	left: 6px;
+	width: 5px;
+	height: 9px;
+	border-right: 2px solid #000000;
+	border-bottom: 2px solid #000000;
+	transform: rotate(45deg);
+}
+
+.inputInsuranceCheckbox:checked + .labelInsuranceCheckbox::after {
+	display: block;
+}
+
+.total,
+.rub {
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 19px;
+	color: #000000;
+}
+
+.btnSubmit {
+	width: 128px;
+	height: 39px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: #ffffff;
+	background: #3b82f6;
+	outline: none;
+	border: 2px solid #f9fafb;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: 0.7s;
+	padding: 10px 14px;
+	margin-left: auto;
+}
+
+.btnSubmit:hover {
+	background: linear-gradient(0deg, #60a5fa, #60a5fa), #60a5fa;
+}
+
+.btnSubmit:disabled {
+	background: #d1d5db;
+}
+
+.btnSubmit:focus,
+.btnSubmi:focus-visible,
+.btnSubmit:focus-within {
+	box-shadow: 0 0 0 3px #3b82f6;
 }
