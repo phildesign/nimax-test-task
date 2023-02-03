@@ -1,5 +1,12 @@
 .formBooking {
+	min-height: 700px;
 	padding: 50px 0;
+}
+
+.formBookingStep {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .title {
@@ -24,11 +31,18 @@
 	grid-template-columns: 1fr 1fr;
 	gap: 24px;
 	align-items: center;
+}
+
+.row:not(:last-child) {
 	margin-bottom: 24px;
 }
 
 .rowAlignBaseline {
 	align-items: baseline;
+}
+
+.rowBottom {
+	margin-top: 253px;
 }
 
 .label {
@@ -80,6 +94,8 @@
 }
 
 .input {
+	width: 100%;
+	font-family: 'Inter', sans-serif;
 	font-weight: 400;
 	font-size: 16px;
 	line-height: 18px;
@@ -166,6 +182,7 @@
 	transition: 0.7s;
 	padding: 10px 14px;
 	margin-left: auto;
+	margin-right: -2px;
 }
 
 .btnSubmit:hover {
@@ -180,4 +197,41 @@
 .btnSubmi:focus-visible,
 .btnSubmit:focus-within {
 	box-shadow: 0 0 0 3px #3b82f6;
+}
+
+.inputDate::-webkit-calendar-picker-indicator {
+	opacity: 0;
+}
+
+.inputDateWrapper {
+	position: relative;
+}
+
+.inputDateWrapper::after {
+	content: '';
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	top: 0;
+	right: 8px;
+	bottom: 0;
+	background: url('./date-icon.svg') no-repeat;
+	pointer-events: none;
+	margin: auto;
+}
+
+.btnPrev {
+	width: 248px;
+	height: 39px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #ffffff;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 19px;
+	color: #000000;
+	border: none;
+	cursor: pointer;
+	padding: 10px 14px;
 }

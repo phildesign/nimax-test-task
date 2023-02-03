@@ -8,7 +8,7 @@ const Step1 = (): JSX.Element => {
 	const onSubmit = () => {};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
 			<h2 className={styles.subtitle}>Расчет стоимости</h2>
 
 			<div className={styles.row}>
