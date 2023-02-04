@@ -1,14 +1,21 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 
 import styles from './FormBooking.module.css';
 
 const Step2 = (): JSX.Element => {
 	const { register, handleSubmit } = useForm();
-	const onSubmit = () => {};
+
+	const navigate = useNavigate();
+
+	const onSubmit = () => {
+		navigate('/step3');
+	};
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
+			<h1 className={styles.title}>Бронирование номера</h1>
 			<h2 className={styles.subtitle}>Данные покупателя</h2>
 
 			<div className={styles.row}>

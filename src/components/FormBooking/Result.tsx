@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import cn from 'classnames';
+import successIcon from './success-icon.svg';
 
 import styles from './FormBooking.module.css';
 
@@ -9,28 +10,9 @@ const Result = (): JSX.Element => {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
-			<h2 className={styles.subtitle}>Подтверждение заказа</h2>
-
-			<div className={cn(styles.text, styles.textBold)}>Иванов Иван Иванович</div>
-
-			<div className={styles.text}>+7 999 123 45-67</div>
-
-			<div className={styles.text}>Номер «Люкс» на 10 ночей</div>
-
-			<div className={styles.text}>2 взрослых, 2 ребенка от 12 лет и 1 ребенок младше 12 лет</div>
-
-			<div className={styles.text}>Страховка включена</div>
-			<div className={cn(styles.text, styles.textBottom)}>
-				К оплате
-				<span className={styles.price}>
-					1 234 <span className={styles.rub}>₽</span>
-				</span>
-			</div>
-
-			<div className={styles.rowBottom}>
-				<button className={styles.btnPrev}>Назад к данным покупателя</button>
-				<button className={styles.btnSubmit}>Далее</button>
-			</div>
+			<img src={successIcon} alt="success-icon" className={styles.successIcon} />
+			<h1 className={styles.successTitle}>Заказ успешно оплачен.</h1>
+			<button className={cn(styles.btnSubmit, styles.btnSuccess)}>Забронировать еще</button>
 		</form>
 	);
 };

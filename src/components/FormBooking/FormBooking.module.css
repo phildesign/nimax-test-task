@@ -1,6 +1,6 @@
 .formBooking {
 	min-height: 700px;
-	padding: 50px 0;
+	padding: 16px 20px;
 }
 
 .formBookingStep {
@@ -33,6 +33,12 @@
 	align-items: center;
 }
 
+@media (max-width: 580px) {
+	.row {
+		grid-template-columns: 1fr;
+	}
+}
+
 .row:not(:last-child) {
 	margin-bottom: 24px;
 }
@@ -45,6 +51,18 @@
 	display: flex;
 	align-items: center;
 	margin-top: 253px;
+}
+
+@media (max-width: 580px) {
+	.rowInsurance {
+		display: flex;
+	}
+}
+
+@media (max-width: 580px) {
+	.rowTotal {
+		grid-template-columns: 1fr 1fr;
+	}
 }
 
 .label {
@@ -69,6 +87,7 @@
 	height: 16px;
 	border: 1px solid #000;
 	border-radius: 100px;
+	background: #fff;
 	margin: auto;
 }
 
@@ -88,6 +107,12 @@
 .radioGroupBox {
 	display: grid;
 	gap: 10px;
+}
+
+@media (max-width: 580px) {
+	.radioGroupBox {
+		display: none;
+	}
 }
 
 .radioGroup {
@@ -116,6 +141,26 @@
 
 .inputRadio:checked + .labelRadio::after {
 	display: block;
+}
+
+.selectTypeRoom {
+	display: none;
+	width: 100%;
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 18px;
+	color: #000000;
+	background: #ffffff;
+	border: 1px solid #e5e7eb;
+	border-radius: 4px;
+	padding: 6px 8px;
+}
+
+@media (max-width: 580px) {
+	.selectTypeRoom {
+		display: block;
+	}
 }
 
 .inputInsuranceCheckbox {
@@ -158,12 +203,94 @@
 	display: block;
 }
 
+.inputToggleInsuranceWrapper {
+	display: none;
+}
+
+@media (max-width: 580px) {
+	.inputInsuranceWrapper {
+		display: none;
+	}
+
+	.inputToggleInsuranceWrapper {
+		display: block;
+		margin-left: auto;
+	}
+}
+
+.inputToggleInsuranceLabel > .inputToggleInsurance {
+	display: none;
+}
+
+.inputToggleInsuranceLabel {
+	position: fixed;
+	display: block;
+	width: 58px;
+	height: 32px;
+	position: relative;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	border-radius: 50px;
+	margin: auto;
+}
+
+.inputToggleInsuranceLabel .inputToggleInsuranceInner {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50px;
+	border: 2px solid #e8e8e8;
+	background: #d1d5db;
+	border-radius: 32px;
+	transition: all 0.2s ease;
+}
+
+.inputToggleInsuranceLabel .inputToggleInsuranceBullet {
+	width: 28px;
+	height: 28px;
+	position: relative;
+	top: 2px;
+	left: 2px;
+	background: #ffffff;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+	border-radius: 50%;
+	transition: all 0.3s ease;
+}
+
+.inputToggleInsuranceLabel .inputToggleInsurance:checked ~ .inputToggleInsuranceInner {
+	border: 15px solid #2ecc71;
+	transition: all 0.2s ease;
+}
+
+.inputToggleInsuranceLabel .inputToggleInsurance:checked ~ .inputToggleInsuranceBullet {
+	left: 28px;
+	transition: all 0.3s ease;
+	animation: 0.2s bullet;
+}
+
+@keyframes bullet {
+	0%,
+	100% {
+		width: 25px;
+	}
+	40% {
+		width: 30px;
+	}
+}
+
 .total,
 .rub {
 	font-weight: 600;
 	font-size: 16px;
 	line-height: 19px;
 	color: #000000;
+}
+
+@media (max-width: 580px) {
+	.total {
+		text-align: right;
+	}
 }
 
 .btnSubmit {
@@ -201,6 +328,12 @@
 	box-shadow: 0 0 0 3px #3b82f6;
 }
 
+@media (max-width: 580px) {
+	.btnSubmit {
+		width: 100%;
+	}
+}
+
 .inputDate::-webkit-calendar-picker-indicator {
 	opacity: 0;
 }
@@ -220,6 +353,30 @@
 	background: url('./date-icon.svg') no-repeat;
 	pointer-events: none;
 	margin: auto;
+}
+
+.inputError {
+	color: #ef4444;
+	background: #fef2f2;
+	border: 1px solid #fecaca;
+}
+
+.inputError:focus {
+	outline: 1px solid #fecaca;
+}
+
+.inputWrapper {
+	position: relative;
+}
+
+.errorMessage {
+	position: absolute;
+	left: 8px;
+	bottom: -15px;
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 12px;
+	color: #ef4444;
 }
 
 .btnPrev {
@@ -259,4 +416,26 @@
 	display: flex;
 	align-items: center;
 	margin-top: 14px;
+}
+
+.successIcon {
+	width: 134px;
+	height: 134px;
+	margin: 236px auto 13px auto;
+}
+
+.successTitle {
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 24px;
+	text-align: center;
+	color: #000000;
+	margin-bottom: 20px;
+}
+
+.btnSuccess {
+	width: 300px;
+	height: 39px;
+	padding: 10px 14px;
+	margin: 0 auto;
 }
