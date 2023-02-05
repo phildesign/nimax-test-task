@@ -7,7 +7,7 @@ const initialState: FormBookingStep2Model = {
 	name: '',
 	patronymic: '',
 	phone: '',
-	date: '',
+	birthday: '',
 };
 
 export const formBookingStep2Slice = createSlice({
@@ -30,14 +30,14 @@ export const formBookingStep2Slice = createSlice({
 			console.log(action.payload);
 			state.phone = action.payload;
 		},
-		chooseDate: (state, action) => {
+		chooseBirthday: (state, action) => {
 			console.log(action.payload);
-			state.date = action.payload;
+			state.birthday = action.payload;
 		},
 	},
 });
 
-export const { chooseSurname, chooseName, choosePatronymic, choosePhone, chooseDate } =
+export const { chooseSurname, chooseName, choosePatronymic, choosePhone, chooseBirthday } =
 	formBookingStep2Slice.actions;
 
 export const formBookingStep2Selector = (state: RootState) => state.formBookingStep2Slice;

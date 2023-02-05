@@ -15,5 +15,5 @@ export interface FormBookingStep2Model {
 	name: string;
 	patronymic: string;
 	phone: string;
-	date: string;
+	birthday: string;
 }

@@ -1,15 +1,48 @@
 import { useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form/dist/types';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
+import { FormBookingStep2Model } from '../../interfaces/formBooking.interface';
+import {
+	chooseBirthday,
+	chooseName,
+	choosePatronymic,
+	choosePhone,
+	chooseSurname,
+} from '../../redux/slices/formBookingStep2Slice';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 import styles from './FormBooking.module.css';
+import { validateErrors } from '../../utils/validateErrors';
 
 const Step2 = (): JSX.Element => {
-	const { register, handleSubmit } = useForm();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		control,
+		watch,
+	} = useForm<FormBookingStep2Model>({
+		defaultValues: {},
+		mode: 'onChange',
+	});
+
+	const dispatch = useAppDispatch();
 
 	const navigate = useNavigate();
 
-	const onSubmit = () => {
+	const surname = useAppSelector((state) => state.formBookingStep2Slice.surname);
+	const name = useAppSelector((state) => state.formBookingStep2Slice.name);
+	const patronymic = useAppSelector((state) => state.formBookingStep2Slice.patronymic);
+	const phone = useAppSelector((state) => state.formBookingStep2Slice.phone);
+	const birthday = useAppSelector((state) => state.formBookingStep2Slice.birthday);
+
+	const onSubmit: SubmitHandler<FormBookingStep2Model> = (data) => {
+		dispatch(chooseSurname(data.surname));
+		dispatch(chooseName(data.name));
+		dispatch(choosePatronymic(data.patronymic));
+		dispatch(choosePhone(data.phone));
+		dispatch(chooseBirthday(data.birthday));
 		navigate('/step3');
 	};
 
@@ -22,28 +55,65 @@ const Step2 = (): JSX.Element => {
 				<label htmlFor="surname" className={styles.label}>
 					Фамилия
 				</label>
-				<input type="text" id="surname" className={styles.input} />
+				<div className={styles.inputWrapper}>
+					<input
+						type="text"
+						id="surname"
+						className={cn(styles.input, {
+							[styles.inputError]: errors.surname?.type,
+						})}
+						{...register('surname', { required: true })}
+					/>
+					<span className={styles.errorMessage}>
+						{errors.surname?.type && validateErrors(errors.surname?.type)}
+					</span>
+				</div>
 			</div>
 
 			<div className={styles.row}>
 				<label htmlFor="name" className={styles.label}>
 					Имя
 				</label>
-				<input type="text" id="name" className={styles.input} />
+				<div className={styles.inputWrapper}>
+					<input
+						type="text"
+						id="name"
+						className={cn(styles.input, {
+							[styles.inputError]: errors.name?.type,
+						})}
+						{...register('name', { required: true })}
+					/>
+					<span className={styles.errorMessage}>
+						{errors.name?.type && validateErrors(errors.name?.type)}
+					</span>
+				</div>
 			</div>
 
 			<div className={styles.row}>
 				<label htmlFor="patronymic" className={styles.label}>
 					Отчество
 				</label>
-				<input type="text" id="patronymic" className={styles.input} />
+				<input type="text" id="patronymic" className={styles.input} {...register('patronymic')} />
 			</div>
 
 			<div className={styles.row}>
 				<label htmlFor="phone" className={styles.label}>
 					Номер телефона
 				</label>
-				<input type="text" id="phone" className={styles.input} />
+				<div className={styles.inputWrapper}>
+					<input
+						type="text"
+						id="phone"
+						placeholder="+ 7 999 123 45-67"
+						className={cn(styles.input, {
+							[styles.inputError]: errors.phone?.type,
+						})}
+						{...register('phone', { required: true })}
+					/>
+					<span className={styles.errorMessage}>
+						{errors.phone?.type && validateErrors(errors.phone?.type)}
+					</span>
+				</div>
 			</div>
 
 			<div className={styles.row}>
@@ -51,7 +121,17 @@ const Step2 = (): JSX.Element => {
 					Дата рождения
 				</label>
 				<div className={styles.inputDateWrapper}>
-					<input type="date" id="birthday" className={cn(styles.input, styles.inputDate)} />
+					<input
+						type="date"
+						id="birthday"
+						className={cn(styles.input, styles.inputDate, {
+							[styles.inputError]: errors.birthday?.type,
+						})}
+						{...register('birthday', { required: true })}
+					/>
+					<span className={styles.errorMessage}>
+						{errors.birthday?.type && validateErrors(errors.birthday?.type)}
+					</span>
 				</div>
 			</div>
 

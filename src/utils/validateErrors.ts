@@ -1,7 +1,7 @@
 import {
 	MIN,
 	ENTER_VALUE_GREATER_THAN_1,
-	REQUIRE,
+	REQUIRED,
 	THIS_FIELD_IS_REQUIRED,
 	MAX,
 	ENTER_VALUE_LESS_THAN_3,
@@ -11,7 +11,7 @@ export const validateErrors = (type: string) => {
 	switch (type) {
 		case MIN:
 			return ENTER_VALUE_GREATER_THAN_1;
-		case REQUIRE:
+		case REQUIRED:
 			return THIS_FIELD_IS_REQUIRED;
 		case MAX:
 			return ENTER_VALUE_LESS_THAN_3;
