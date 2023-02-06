@@ -1,7 +1,8 @@
-import { useForm, useWatch, Control } from 'react-hook-form';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { useAppDispatch } from '../../../hooks/hooks';
 import {
 	chooseAmountOfChildren,
 	chooseAmountOfChildrenUntilFive,
@@ -9,7 +10,7 @@ import {
 	chooseNumberOfAdults,
 	chooseNumberOfNights,
 	chooseTypeRoom,
-	totalPrice,
+	setTotalPrice,
 } from '../../../redux/slices/formBookingStep1Slice';
 import { FormBookingStep1Model } from '../../../interfaces/formBooking.interface';
 import { SubmitHandler } from 'react-hook-form/dist/types';
@@ -20,66 +21,47 @@ import styles from '../FormBooking.module.css';
 
 const CostCalculation = (): JSX.Element => {
 	const dispatch = useAppDispatch();
-	const {
-		numberOfAdults,
-		amountOfChildren,
-		amountOfChildrenUntilFive,
-		typeRoom,
-		numberOfNights,
-		insurance,
-		total,
-	} = useAppSelector((state) => state.formBookingStep1Slice);
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-		control,
 		watch,
 	} = useForm<FormBookingStep1Model>({
-		defaultValues: { numberOfAdults, amountOfChildren, typeRoom: 'Эконом', insurance: true },
+		defaultValues: {
+			numberOfAdults: 1,
+			amountOfChildren: 0,
+			amountOfChildrenUntilFive: 0,
+			numberOfNights: 1,
+			typeRoom: 'Эконом',
+			insurance: [],
+		},
 		mode: 'onChange',
 	});
 
 	const navigate = useNavigate();
 
-	const onSubmit: SubmitHandler<FormBookingStep1Model> = (data) => {
-		dispatch(chooseNumberOfAdults(data.numberOfAdults));
-		dispatch(chooseAmountOfChildren(data.amountOfChildren));
-		dispatch(chooseAmountOfChildrenUntilFive(data.amountOfChildrenUntilFive));
-		dispatch(chooseTypeRoom(data.typeRoom));
-		dispatch(chooseNumberOfNights(data.numberOfNights));
-		dispatch(chooseInsurance(data.insurance));
-		dispatch(totalPrice(data.total));
+	const onSubmit: SubmitHandler<FormBookingStep1Model> = () => {
+		dispatch(chooseNumberOfAdults(numberOfAdults));
+		dispatch(chooseAmountOfChildren(amountOfChildren));
+		dispatch(chooseAmountOfChildrenUntilFive(amountOfChildrenUntilFive));
+		dispatch(chooseTypeRoom(typeRoom));
+		dispatch(chooseNumberOfNights(numberOfNights));
+		dispatch(chooseInsurance(insurance));
+		dispatch(setTotalPrice(total));
 		navigate('/step2');
 	};
 
-	function CalculateCost({ control }: { control: Control<FormBookingStep1Model> }) {
-		const numberOfAdults = useWatch({
-			control,
-			name: 'numberOfAdults',
-		});
+	const numberOfAdults = watch('numberOfAdults');
+	const numberOfNights = watch('numberOfNights');
+	const amountOfChildren = watch('amountOfChildren');
+	const amountOfChildrenUntilFive = watch('amountOfChildrenUntilFive');
+	const typeRoom = watch('typeRoom');
+	const insurance = watch('insurance', []);
 
-		const numberOfNights = useWatch({
-			control,
-			name: 'numberOfNights',
-		});
+	const [total, setTotal] = React.useState(0);
 
-		const amountOfChildren = useWatch({
-			control,
-			name: 'amountOfChildren',
-		});
-
-		const insurance = useWatch({
-			control,
-			name: 'insurance',
-		});
-
-		const typeRoom = useWatch({
-			control,
-			name: 'typeRoom',
-		});
-
+	React.useEffect(() => {
 		let result = 0;
 
 		switch (typeRoom) {
@@ -97,12 +79,12 @@ const CostCalculation = (): JSX.Element => {
 				break;
 		}
 
-		if (insurance) {
+		if (insurance.length) {
 			result += result * 0.1;
 		}
 
-		return <span>{result}</span>;
-	}
+		setTotal(result);
+	}, [numberOfAdults, numberOfNights, amountOfChildren, typeRoom, insurance]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
@@ -154,7 +136,6 @@ const CostCalculation = (): JSX.Element => {
 						className={cn(styles.input, {
 							[styles.inputError]: errors.amountOfChildrenUntilFive?.type,
 						})}
-						defaultValue={amountOfChildrenUntilFive}
 						{...register('amountOfChildrenUntilFive', { max: watch('numberOfAdults') * 3 })}
 					/>
 					<span className={styles.errorMessage}>
@@ -172,7 +153,7 @@ const CostCalculation = (): JSX.Element => {
 						<input
 							type="radio"
 							id="typeRoom1"
-							defaultValue={'Эконом'}
+							value={'Эконом'}
 							className={styles.inputRadio}
 							{...register('typeRoom')}
 						/>
@@ -184,7 +165,7 @@ const CostCalculation = (): JSX.Element => {
 						<input
 							type="radio"
 							id="typeRoom2"
-							defaultValue={'Стандарт'}
+							value={'Стандарт'}
 							className={styles.inputRadio}
 							{...register('typeRoom')}
 						/>
@@ -196,7 +177,7 @@ const CostCalculation = (): JSX.Element => {
 						<input
 							type="radio"
 							id="typeRoom3"
-							defaultValue={'Люкс'}
+							value={'Люкс'}
 							className={styles.inputRadio}
 							{...register('typeRoom')}
 						/>
@@ -271,6 +252,7 @@ const CostCalculation = (): JSX.Element => {
 				<label className={styles.label}>Итого:</label>
 				<div className={styles.total}>
 					{total}
+					{/* <CalculateCost control={control} /> */}
 					<span className={styles.rub}>₽</span>
 				</div>
 			</div>

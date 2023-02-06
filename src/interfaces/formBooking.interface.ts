@@ -6,7 +6,7 @@ export interface FormBookingStep1Model {
 	amountOfChildrenUntilFive: number;
 	typeRoom: string;
 	numberOfNights: number;
-	insurance: boolean;
+	insurance: [];
 	total: number;
 }
 

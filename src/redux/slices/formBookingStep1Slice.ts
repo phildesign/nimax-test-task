@@ -8,7 +8,7 @@ const initialState: FormBookingStep1Model = {
 	amountOfChildrenUntilFive: 0,
 	typeRoom: 'Эконом',
 	numberOfNights: 1,
-	insurance: true,
+	insurance: [],
 	total: 0,
 };
 
@@ -40,7 +40,7 @@ export const formBookingStep1Slice = createSlice({
 			console.log(action.payload);
 			state.insurance = action.payload;
 		},
-		totalPrice: (state, action) => {
+		setTotalPrice: (state, action) => {
 			console.log(action.payload);
 			state.total = action.payload;
 		},
@@ -54,7 +54,7 @@ export const {
 	chooseTypeRoom,
 	chooseNumberOfNights,
 	chooseInsurance,
-	totalPrice,
+	setTotalPrice,
 } = formBookingStep1Slice.actions;
 
 export const formBookingStep1Selector = (state: RootState) => state.formBookingStep1Slice;
