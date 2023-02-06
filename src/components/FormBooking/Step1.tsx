@@ -206,7 +206,7 @@ const Step1 = (): JSX.Element => {
 					</div>
 				</div>
 
-				{/* <div className={styles.selectTypeRoomWrapper}>
+				<div className={styles.selectTypeRoomWrapper}>
 					<select
 						id="selectTypeRoom"
 						className={styles.selectTypeRoom}
@@ -216,7 +216,7 @@ const Step1 = (): JSX.Element => {
 						<option value="Стандарт">Стандарт</option>
 						<option value="Люкс">Люкс</option>
 					</select>
-				</div> */}
+				</div>
 			</div>
 
 			<div className={styles.row}>
@@ -254,8 +254,13 @@ const Step1 = (): JSX.Element => {
 				</div>
 
 				<div className={styles.inputToggleInsuranceWrapper}>
-					<label className={styles.inputToggleInsuranceLabel}>
-						<input type="checkbox" className={styles.inputToggleInsurance} />
+					<label htmlFor="insuranceMobile" className={styles.inputToggleInsuranceLabel}>
+						<input
+							type="checkbox"
+							id="insuranceMobile"
+							className={styles.inputToggleInsurance}
+							{...register('insurance')}
+						/>
 						<div className={styles.inputToggleInsuranceInner}></div>
 						<div className={styles.inputToggleInsuranceBullet}></div>
 					</label>

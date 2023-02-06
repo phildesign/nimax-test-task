@@ -110,7 +110,7 @@ const Step2 = (): JSX.Element => {
 				</div>
 			</div>
 
-			<div className={styles.row}>
+			<div className={cn(styles.row, styles.rowBirthday)}>
 				<label htmlFor="birthday" className={styles.label}>
 					Дата рождения
 				</label>

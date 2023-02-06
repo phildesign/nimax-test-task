@@ -29,17 +29,18 @@
 	min-height: 32px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 24px;
+	gap: 0 24px;
 	align-items: center;
 }
 
 @media (max-width: 580px) {
 	.row {
 		grid-template-columns: 1fr;
+		gap: 5px 0;
 	}
 }
 
-.row:not(:last-child) {
+.row {
 	margin-bottom: 24px;
 }
 
@@ -47,10 +48,20 @@
 	align-items: baseline;
 }
 
+.rowTotal {
+	margin-bottom: 152px;
+}
+
+@media (max-width: 580px) {
+	.rowTotal {
+		grid-template-columns: 1fr 1fr;
+		margin-bottom: 10px;
+	}
+}
+
 .rowBottom {
 	display: flex;
 	align-items: center;
-	margin-top: 253px;
 }
 
 @media (max-width: 580px) {
@@ -59,16 +70,20 @@
 	}
 }
 
+.rowBirthday {
+	margin-bottom: 277px;
+}
+
 @media (max-width: 580px) {
-	.row.rowInsurance {
-		display: flex;
-		margin-bottom: 47px;
+	.row.rowBirthday {
+		margin-bottom: 83px;
 	}
 }
 
 @media (max-width: 580px) {
-	.rowTotal {
-		grid-template-columns: 1fr 1fr;
+	.row.rowInsurance {
+		display: flex;
+		margin-bottom: 47px;
 	}
 }
 
@@ -429,6 +444,13 @@
 	display: flex;
 	align-items: center;
 	margin-top: 14px;
+	margin-bottom: 375px;
+}
+
+@media (max-width: 580px) {
+	.textBottom {
+		margin-bottom: 277px;
+	}
 }
 
 .successIcon {
