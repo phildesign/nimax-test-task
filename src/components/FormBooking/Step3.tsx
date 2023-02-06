@@ -52,7 +52,9 @@ const Step3 = (): JSX.Element => {
 			</div>
 
 			<div className={styles.rowBottom}>
-				<button className={styles.btnPrev}>Назад к данным покупателя</button>
+				<button className={styles.btnPrev} onClick={() => navigate('/step2')}>
+					Назад к данным покупателя
+				</button>
 				<button className={styles.btnSubmit}>Оплатить</button>
 			</div>
 		</form>

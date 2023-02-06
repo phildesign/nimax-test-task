@@ -130,7 +130,9 @@ const Step2 = (): JSX.Element => {
 			</div>
 
 			<div className={cn(styles.row, styles.rowBottom)}>
-				<button className={styles.btnPrev}>Назад к расчету стоимости</button>
+				<button className={styles.btnPrev} onClick={() => navigate('/')}>
+					Назад к расчету стоимости
+				</button>
 				<button className={styles.btnSubmit}>Далее</button>
 			</div>
 		</form>
