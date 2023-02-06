@@ -4,6 +4,7 @@ import cn from 'classnames';
 
 import styles from './FormBooking.module.css';
 import { useNavigate } from 'react-router-dom';
+import { counterChildren } from '../../utils/counterPeople';
 
 const Step3 = (): JSX.Element => {
 	const { surname, name, patronymic, phone, birthday } = useAppSelector(
@@ -40,7 +41,8 @@ const Step3 = (): JSX.Element => {
 				Номер «{typeRoom}» на {numberOfNights} ночей
 			</div>
 			<div className={styles.text}>
-				{numberOfAdults} взрослых, {amountOfChildren} ребенка от 5 лет и {amountOfChildrenUntilFive}
+				{numberOfAdults} взрослых, <span>{counterChildren(amountOfChildren)}</span> и{' '}
+				{amountOfChildrenUntilFive}
 				ребенок младше 5 лет
 			</div>
 			<div className={styles.text}>{insurance ? 'Страховка включена' : 'Без страховки'}</div>
