@@ -31,12 +31,6 @@ const Step2 = (): JSX.Element => {
 
 	const navigate = useNavigate();
 
-	const surname = useAppSelector((state) => state.formBookingStep2Slice.surname);
-	const name = useAppSelector((state) => state.formBookingStep2Slice.name);
-	const patronymic = useAppSelector((state) => state.formBookingStep2Slice.patronymic);
-	const phone = useAppSelector((state) => state.formBookingStep2Slice.phone);
-	const birthday = useAppSelector((state) => state.formBookingStep2Slice.birthday);
-
 	const onSubmit: SubmitHandler<FormBookingStep2Model> = (data) => {
 		dispatch(chooseSurname(data.surname));
 		dispatch(chooseName(data.name));
