@@ -29,7 +29,8 @@ const Step3 = (): JSX.Element => {
 		navigate('/result');
 	};
 
-	const handleClickPrev = () => {
+	const handleClickPrev = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
 		navigate('/step2');
 	};
 

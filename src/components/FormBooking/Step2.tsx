@@ -40,7 +40,8 @@ const Step2 = (): JSX.Element => {
 		navigate('/step3');
 	};
 
-	const handleClickPrev = () => {
+	const handleClickPrev = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
 		navigate('/');
 	};
 
