@@ -20,16 +20,15 @@ import styles from './FormBooking.module.css';
 
 const Step1 = (): JSX.Element => {
 	const dispatch = useAppDispatch();
-	// const history = useHistory();
-	const numberOfAdults = useAppSelector((state) => state.formBookingStep1Slice.numberOfAdults);
-	const amountOfChildren = useAppSelector((state) => state.formBookingStep1Slice.amountOfChildren);
-	const amountOfChildrenUntilFive = useAppSelector(
-		(state) => state.formBookingStep1Slice.amountOfChildrenUntilFive,
-	);
-	const typeRoom = useAppSelector((state) => state.formBookingStep1Slice.typeRoom);
-	const numberOfNights = useAppSelector((state) => state.formBookingStep1Slice.numberOfNights);
-	const insurance = useAppSelector((state) => state.formBookingStep1Slice.insurance);
-	const total = useAppSelector((state) => state.formBookingStep1Slice.total);
+	const {
+		numberOfAdults,
+		amountOfChildren,
+		amountOfChildrenUntilFive,
+		typeRoom,
+		numberOfNights,
+		insurance,
+		total,
+	} = useAppSelector((state) => state.formBookingStep1Slice);
 
 	const {
 		register,
@@ -53,8 +52,6 @@ const Step1 = (): JSX.Element => {
 		dispatch(chooseInsurance(data.insurance));
 		dispatch(totalPrice(data.total));
 		navigate('/step2');
-
-		// console.log(calculateCost(data), 'calculateCost');
 	};
 
 	function CalculateCost({ control }: { control: Control<FormBookingStep1Model> }) {
