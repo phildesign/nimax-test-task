@@ -3,6 +3,7 @@ import { useAppSelector } from '../../hooks/hooks';
 import cn from 'classnames';
 
 import styles from './FormBooking.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const Step3 = (): JSX.Element => {
 	const { surname, name, patronymic, phone, birthday } = useAppSelector(
@@ -20,7 +21,12 @@ const Step3 = (): JSX.Element => {
 	} = useAppSelector((state) => state.formBookingStep1Slice);
 
 	const { register, handleSubmit } = useForm({});
-	const onSubmit = () => {};
+
+	const navigate = useNavigate();
+
+	const onSubmit = () => {
+		navigate('/result');
+	};
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>

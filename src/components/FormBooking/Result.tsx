@@ -1,19 +1,20 @@
-import { useForm } from 'react-hook-form';
 import cn from 'classnames';
+import { useNavigate } from 'react-router-dom';
 import successIcon from './success-icon.svg';
 
 import styles from './FormBooking.module.css';
 
 const Result = (): JSX.Element => {
-	const { register, handleSubmit } = useForm();
-	const onSubmit = () => {};
+	const navigate = useNavigate();
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
+		<div className={styles.formBookingStep}>
 			<img src={successIcon} alt="success-icon" className={styles.successIcon} />
 			<h1 className={styles.successTitle}>Заказ успешно оплачен.</h1>
-			<button className={cn(styles.btnSubmit, styles.btnSuccess)}>Забронировать еще</button>
-		</form>
+			<button className={cn(styles.btnSubmit, styles.btnSuccess)} onClick={() => navigate('/')}>
+				Забронировать еще
+			</button>
+		</div>
 	);
 };
 
