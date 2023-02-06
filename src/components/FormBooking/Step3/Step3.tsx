@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form';
-import { useAppSelector } from '../../hooks/hooks';
-import cn from 'classnames';
-
-import styles from './FormBooking.module.css';
 import { useNavigate } from 'react-router-dom';
-import { counterChildren } from '../../utils/counterPeople';
+import { useForm } from 'react-hook-form';
+import { useAppSelector } from '../../../hooks/hooks';
+import cn from 'classnames';
+import { counterChildren } from '../../../utils/counterPeople';
+
+import styles from '../FormBooking.module.css';
 
 const Step3 = (): JSX.Element => {
 	const { surname, name, patronymic, phone, birthday } = useAppSelector(

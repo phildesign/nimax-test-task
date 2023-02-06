@@ -2,18 +2,18 @@ import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { FormBookingStep2Model } from '../../interfaces/formBooking.interface';
+import { FormBookingStep2Model } from '../../../interfaces/formBooking.interface';
 import {
 	chooseBirthday,
 	chooseName,
 	choosePatronymic,
 	choosePhone,
 	chooseSurname,
-} from '../../redux/slices/formBookingStep2Slice';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+} from '../../../redux/slices/formBookingStep2Slice';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+import { validateErrors } from '../../../utils/validateErrors';
 
-import styles from './FormBooking.module.css';
-import { validateErrors } from '../../utils/validateErrors';
+import styles from '../FormBooking.module.css';
 
 const Step2 = (): JSX.Element => {
 	const {

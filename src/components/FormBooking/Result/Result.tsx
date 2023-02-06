@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import successIcon from './success-icon.svg';
 
-import styles from './FormBooking.module.css';
+import styles from '../FormBooking.module.css';
 
 const Result = (): JSX.Element => {
 	const navigate = useNavigate();

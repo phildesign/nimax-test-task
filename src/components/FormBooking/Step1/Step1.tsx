@@ -1,7 +1,7 @@
 import { useForm, useWatch, Control } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import {
 	chooseAmountOfChildren,
 	chooseAmountOfChildrenUntilFive,
@@ -10,13 +10,13 @@ import {
 	chooseNumberOfNights,
 	chooseTypeRoom,
 	totalPrice,
-} from '../../redux/slices/formBookingStep1Slice';
-import { FormBookingStep1Model } from '../../interfaces/formBooking.interface';
+} from '../../../redux/slices/formBookingStep1Slice';
+import { FormBookingStep1Model } from '../../../interfaces/formBooking.interface';
 import { SubmitHandler } from 'react-hook-form/dist/types';
-import { validateErrors } from '../../utils/validateErrors';
-import { ECO_PRICE, LUHURY_PRICE, STANDART_PRICE } from './FormBookingConstants';
+import { validateErrors } from '../../../utils/validateErrors';
+import { ECO_PRICE, LUHURY_PRICE, STANDART_PRICE } from '../FormBookingConstants';
 
-import styles from './FormBooking.module.css';
+import styles from '../FormBooking.module.css';
 
 const Step1 = (): JSX.Element => {
 	const dispatch = useAppDispatch();
