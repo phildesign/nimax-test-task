@@ -29,6 +29,10 @@ const Step3 = (): JSX.Element => {
 		navigate('/result');
 	};
 
+	const handleClickPrev = () => {
+		navigate('/step2');
+	};
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
 			<h1 className={styles.title}>Бронирование номера</h1>
@@ -54,7 +58,7 @@ const Step3 = (): JSX.Element => {
 			</div>
 
 			<div className={styles.rowBottom}>
-				<button className={styles.btnPrev} onClick={() => navigate('/step2')}>
+				<button className={styles.btnPrev} onClick={handleClickPrev}>
 					Назад к данным покупателя
 				</button>
 				<button className={styles.btnSubmit}>Оплатить</button>
