@@ -18,7 +18,7 @@ import { ECO_PRICE, LUHURY_PRICE, STANDART_PRICE } from '../FormBookingConstants
 
 import styles from '../FormBooking.module.css';
 
-const Step1 = (): JSX.Element => {
+const CostCalculation = (): JSX.Element => {
 	const dispatch = useAppDispatch();
 	const {
 		numberOfAdults,
@@ -280,4 +280,4 @@ const Step1 = (): JSX.Element => {
 	);
 };
 
-export default Step1;
+export default CostCalculation;

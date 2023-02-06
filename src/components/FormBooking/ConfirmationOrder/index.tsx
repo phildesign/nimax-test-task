@@ -6,7 +6,7 @@ import { counterChildren } from '../../../utils/counterPeople';
 
 import styles from '../FormBooking.module.css';
 
-const Step3 = (): JSX.Element => {
+const ConfirmationOrder = (): JSX.Element => {
 	const { surname, name, patronymic, phone, birthday } = useAppSelector(
 		(state) => state.formBookingStep2Slice,
 	);
@@ -68,4 +68,4 @@ const Step3 = (): JSX.Element => {
 	);
 };
 
-export default Step3;
+export default ConfirmationOrder;

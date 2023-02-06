@@ -15,7 +15,7 @@ import { validateErrors } from '../../../utils/validateErrors';
 
 import styles from '../FormBooking.module.css';
 
-const Step2 = (): JSX.Element => {
+const BuyerData = (): JSX.Element => {
 	const {
 		register,
 		handleSubmit,
@@ -144,4 +144,4 @@ const Step2 = (): JSX.Element => {
 	);
 };
 
-export default Step2;
+export default BuyerData;
