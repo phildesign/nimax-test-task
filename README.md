@@ -57,6 +57,8 @@
 
 ---
 
+[<img src="./project.jpg">]()
+
 ### Stack:
 
 - React

@@ -5,7 +5,8 @@
 
 @media (max-width: 580px) {
 	.formBooking {
-		height: 100vh;
+		min-height: 100vh;
+		height: 100%;
 	}
 }
 
