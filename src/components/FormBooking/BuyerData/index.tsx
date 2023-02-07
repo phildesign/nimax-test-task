@@ -52,7 +52,7 @@ const BuyerData = (): JSX.Element => {
 
 	const handleClickPrev = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
-		navigate('/');
+		navigate('/nimax-test-task');
 	};
 
 	return (
