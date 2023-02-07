@@ -40,6 +40,7 @@ const CostCalculation = (): JSX.Element => {
 		handleSubmit,
 		formState: { errors },
 		watch,
+		trigger,
 	} = useForm<formBookingCostCalculationModel>({
 		defaultValues: {
 			numberOfAdults,
@@ -112,7 +113,12 @@ const CostCalculation = (): JSX.Element => {
 	]);
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			onChange={(e) => {
+				console.log(e);
+			}}
+			className={styles.formBookingStep}>
 			<h1 className={styles.title}>Бронирование номера</h1>
 			<h2 className={styles.subtitle}>Расчет стоимости</h2>
 
@@ -128,6 +134,7 @@ const CostCalculation = (): JSX.Element => {
 							[styles.inputError]: errors.numberOfAdults?.type,
 						})}
 						min={1}
+						onInput={() => trigger()}
 						{...register('numberOfAdults', { required: true, min: 1 })}
 					/>
 					<span className={styles.errorMessage}>
