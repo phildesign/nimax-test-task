@@ -1,5 +1,5 @@
 import React from 'react';
-// import InputMask from 'react-input-mask';
+import InputMask from 'react-input-mask';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { useNavigate } from 'react-router-dom';
@@ -133,11 +133,8 @@ const BuyerData = (): JSX.Element => {
 					Номер телефона
 				</label>
 				<div className={styles.inputWrapper}>
-					{/* <InputMask
+					<InputMask
 						mask="+ 7 999 999 99-99"
-						{...register('phone')}></InputMask> */}
-
-					<input
 						type="tel"
 						id="phone"
 						placeholder="+ 7 999 123 45-67"
