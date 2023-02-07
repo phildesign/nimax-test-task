@@ -1,16 +1,18 @@
-import { useForm } from 'react-hook-form';
+import React from 'react';
+import InputMask from 'react-input-mask';
+import { useForm, Controller } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
-import { FormBookingStep2Model } from '../../../interfaces/formBooking.interface';
+import { formBookingBuyerDataModel } from '../../../interfaces/formBooking.interface';
 import {
 	chooseBirthday,
 	chooseName,
 	choosePatronymic,
 	choosePhone,
 	chooseSurname,
-} from '../../../redux/slices/formBookingStep2Slice';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
+} from '../../../redux/slices/formBookingBuyerDataSlice';
+import { useAppDispatch } from '../../../hooks/hooks';
 import { validateErrors } from '../../../utils/validateErrors';
 
 import styles from '../FormBooking.module.css';
@@ -20,10 +22,7 @@ const BuyerData = (): JSX.Element => {
 		register,
 		handleSubmit,
 		formState: { errors },
-		control,
-		watch,
-	} = useForm<FormBookingStep2Model>({
-		defaultValues: {},
+	} = useForm<formBookingBuyerDataModel>({
 		mode: 'onChange',
 	});
 
@@ -31,7 +30,7 @@ const BuyerData = (): JSX.Element => {
 
 	const navigate = useNavigate();
 
-	const onSubmit: SubmitHandler<FormBookingStep2Model> = (data) => {
+	const onSubmit: SubmitHandler<formBookingBuyerDataModel> = (data) => {
 		dispatch(chooseSurname(data.surname));
 		dispatch(chooseName(data.name));
 		dispatch(choosePatronymic(data.patronymic));
@@ -61,11 +60,15 @@ const BuyerData = (): JSX.Element => {
 						className={cn(styles.input, {
 							[styles.inputError]: errors.surname?.type,
 						})}
-						{...register('surname', { required: true })}
+						{...register('surname', {
+							required: 'Это поле обязательное',
+							pattern: {
+								value: /[A-Za-zА-Яа-яЁё]/i,
+								message: 'Возможен ввод только текста',
+							},
+						})}
 					/>
-					<span className={styles.errorMessage}>
-						{errors.surname?.type && validateErrors(errors.surname?.type)}
-					</span>
+					<span className={styles.errorMessage}>{errors.surname?.message}</span>
 				</div>
 			</div>
 
@@ -80,11 +83,15 @@ const BuyerData = (): JSX.Element => {
 						className={cn(styles.input, {
 							[styles.inputError]: errors.name?.type,
 						})}
-						{...register('name', { required: true })}
+						{...register('name', {
+							required: 'Это поле обязательное',
+							pattern: {
+								value: /[A-Za-zА-Яа-яЁё]/i,
+								message: 'Возможен ввод только текста',
+							},
+						})}
 					/>
-					<span className={styles.errorMessage}>
-						{errors.name?.type && validateErrors(errors.name?.type)}
-					</span>
+					<span className={styles.errorMessage}>{errors.name?.message}</span>
 				</div>
 			</div>
 
@@ -92,7 +99,22 @@ const BuyerData = (): JSX.Element => {
 				<label htmlFor="patronymic" className={styles.label}>
 					Отчество
 				</label>
-				<input type="text" id="patronymic" className={styles.input} {...register('patronymic')} />
+				<div className={styles.inputWrapper}>
+					<input
+						type="text"
+						id="patronymic"
+						className={cn(styles.input, {
+							[styles.inputError]: errors.patronymic?.type,
+						})}
+						{...register('patronymic', {
+							pattern: {
+								value: /[A-Za-zА-Яа-яЁё]/i,
+								message: 'Возможен ввод только текста',
+							},
+						})}
+					/>
+					<span className={styles.errorMessage}>{errors.patronymic?.message}</span>
+				</div>
 			</div>
 
 			<div className={styles.row}>
@@ -100,14 +122,15 @@ const BuyerData = (): JSX.Element => {
 					Номер телефона
 				</label>
 				<div className={styles.inputWrapper}>
-					<input
-						type="text"
+					<InputMask
+						type="tel"
 						id="phone"
 						placeholder="+ 7 999 123 45-67"
+						mask="+ 7 999 999 99-99"
 						className={cn(styles.input, {
 							[styles.inputError]: errors.phone?.type,
 						})}
-						{...register('phone', { required: true })}
+						{...(register('phone'), { required: true, minLength: 10 })}
 					/>
 					<span className={styles.errorMessage}>
 						{errors.phone?.type && validateErrors(errors.phone?.type)}
@@ -126,11 +149,9 @@ const BuyerData = (): JSX.Element => {
 						className={cn(styles.input, styles.inputDate, {
 							[styles.inputError]: errors.birthday?.type,
 						})}
-						{...register('birthday', { required: true })}
+						{...register('birthday', { required: 'Это поле обязательное' })}
 					/>
-					<span className={styles.errorMessage}>
-						{errors.birthday?.type && validateErrors(errors.birthday?.type)}
-					</span>
+					<span className={styles.errorMessage}>{errors.birthday?.message}</span>
 				</div>
 			</div>
 

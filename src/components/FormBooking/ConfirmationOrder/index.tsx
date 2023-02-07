@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useAppSelector } from '../../../hooks/hooks';
 import cn from 'classnames';
-import { counterChildren } from '../../../utils/counterPeople';
+import { useAppSelector } from '../../../hooks/hooks';
+import { counterAdults, counterChildren } from '../../../utils/counterPeople';
 
 import styles from '../FormBooking.module.css';
 
 const ConfirmationOrder = (): JSX.Element => {
-	const { surname, name, patronymic, phone, birthday } = useAppSelector(
-		(state) => state.formBookingStep2Slice,
+	const { surname, name, patronymic, phone } = useAppSelector(
+		(state) => state.formBookingBuyerDataSlice,
 	);
 
 	const {
@@ -19,14 +19,17 @@ const ConfirmationOrder = (): JSX.Element => {
 		amountOfChildrenUntilFive,
 		insurance,
 		total,
-	} = useAppSelector((state) => state.formBookingStep1Slice);
+	} = useAppSelector((state) => state.formBookingCostCalculationSlice);
 
-	const { register, handleSubmit } = useForm({});
+	const { handleSubmit } = useForm({});
 
 	const navigate = useNavigate();
 
+	const state = useAppSelector((state) => state);
+
 	const onSubmit = () => {
-		navigate('/result');
+		setTimeout(() => alert(JSON.stringify(state, null, 2)), 1000); //fake send to server
+		setTimeout(() => navigate('/result'), 1000);
 	};
 
 	const handleClickPrev = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,9 +49,9 @@ const ConfirmationOrder = (): JSX.Element => {
 				Номер «{typeRoom}» на {numberOfNights} ночей
 			</div>
 			<div className={styles.text}>
-				{numberOfAdults} взрослых, <span>{counterChildren(amountOfChildren)}</span> и{' '}
-				{amountOfChildrenUntilFive}
-				ребенок младше 5 лет
+				{counterAdults(numberOfAdults)}
+				<span>{counterChildren(amountOfChildren, 'afterFive')}</span>
+				<span>{counterChildren(amountOfChildrenUntilFive, 'beforeFive')}</span>
 			</div>
 			<div className={styles.text}>{insurance ? 'Страховка включена' : 'Без страховки'}</div>
 			<div className={cn(styles.text, styles.textBottom)}>
@@ -57,7 +60,6 @@ const ConfirmationOrder = (): JSX.Element => {
 					{total} <span className={styles.rub}>₽</span>
 				</span>
 			</div>
-
 			<div className={styles.rowBottom}>
 				<button className={styles.btnPrev} onClick={handleClickPrev}>
 					Назад к данным покупателя

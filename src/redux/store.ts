@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import formBookingStep1Slice from './slices/formBookingStep1Slice';
-import formBookingStep2Slice from './slices/formBookingStep2Slice';
+import formBookingCostCalculationSlice from './slices/formBookingCostCalculationSlice';
+import formBookingBuyerDataSlice from './slices/formBookingBuyerDataSlice';
 
 const store = configureStore({
 	reducer: {
-		formBookingStep1Slice,
-		formBookingStep2Slice,
+		formBookingCostCalculationSlice,
+		formBookingBuyerDataSlice,
 	},
 });
 

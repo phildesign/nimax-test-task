@@ -1,6 +1,12 @@
 .formBooking {
-	min-height: 700px;
+	height: 700px;
 	padding: 16px 20px;
+}
+
+@media (max-width: 580px) {
+	.formBooking {
+		height: 100vh;
+	}
 }
 
 .formBookingStep {
@@ -48,35 +54,22 @@
 	align-items: baseline;
 }
 
-.rowTotal {
-	margin-bottom: 152px;
-}
-
 @media (max-width: 580px) {
 	.rowTotal {
 		grid-template-columns: 1fr 1fr;
-		margin-bottom: 10px;
 	}
 }
 
 .rowBottom {
 	display: flex;
 	align-items: center;
+	margin-top: auto;
+	margin-bottom: 0;
 }
 
 @media (max-width: 580px) {
 	.rowBottom {
 		flex-direction: column-reverse;
-	}
-}
-
-.rowBirthday {
-	margin-bottom: 277px;
-}
-
-@media (max-width: 580px) {
-	.row.rowBirthday {
-		margin-bottom: 83px;
 	}
 }
 
@@ -473,4 +466,10 @@
 	height: 39px;
 	padding: 10px 14px;
 	margin: 0 auto;
+}
+
+@media (max-width: 580px) {
+	.btnSuccess {
+		margin-top: auto;
+	}
 }

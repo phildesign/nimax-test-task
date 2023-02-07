@@ -1,6 +1,4 @@
-// export interface FormBookingModel {}
-
-export interface FormBookingStep1Model {
+export interface formBookingCostCalculationModel {
 	numberOfAdults: number;
 	amountOfChildren: number;
 	amountOfChildrenUntilFive: number;
@@ -10,7 +8,7 @@ export interface FormBookingStep1Model {
 	total: number;
 }
 
-export interface FormBookingStep2Model {
+export interface formBookingBuyerDataModel {
 	surname: string;
 	name: string;
 	patronymic: string;

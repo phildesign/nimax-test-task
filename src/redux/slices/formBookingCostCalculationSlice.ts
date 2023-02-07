@@ -1,8 +1,8 @@
 import { RootState } from '../store';
 import { createSlice } from '@reduxjs/toolkit';
-import { FormBookingStep1Model } from '../../interfaces/formBooking.interface';
+import { formBookingCostCalculationModel } from '../../interfaces/formBooking.interface';
 
-const initialState: FormBookingStep1Model = {
+const initialState: formBookingCostCalculationModel = {
 	numberOfAdults: 1,
 	amountOfChildren: 0,
 	amountOfChildrenUntilFive: 0,
@@ -12,36 +12,29 @@ const initialState: FormBookingStep1Model = {
 	total: 0,
 };
 
-export const formBookingStep1Slice = createSlice({
+export const formBookingCostCalculationSlice = createSlice({
 	name: 'formBooking',
 	initialState: initialState,
 	reducers: {
 		chooseNumberOfAdults: (state, action) => {
-			console.log(action.payload);
 			state.numberOfAdults = action.payload;
 		},
 		chooseAmountOfChildren: (state, action) => {
-			console.log(action.payload);
 			state.amountOfChildren = action.payload;
 		},
 		chooseAmountOfChildrenUntilFive: (state, action) => {
-			console.log(action.payload);
 			state.amountOfChildrenUntilFive = action.payload;
 		},
 		chooseTypeRoom: (state, action) => {
-			console.log(action.payload);
 			state.typeRoom = action.payload;
 		},
 		chooseNumberOfNights: (state, action) => {
-			console.log(action.payload);
 			state.numberOfNights = action.payload;
 		},
 		chooseInsurance: (state, action) => {
-			console.log(action.payload);
 			state.insurance = action.payload;
 		},
 		setTotalPrice: (state, action) => {
-			console.log(action.payload);
 			state.total = action.payload;
 		},
 	},
@@ -55,8 +48,9 @@ export const {
 	chooseNumberOfNights,
 	chooseInsurance,
 	setTotalPrice,
-} = formBookingStep1Slice.actions;
+} = formBookingCostCalculationSlice.actions;
 
-export const formBookingStep1Selector = (state: RootState) => state.formBookingStep1Slice;
+export const formBookingCostCalculationSelector = (state: RootState) =>
+	state.formBookingCostCalculationSlice;
 
-export default formBookingStep1Slice.reducer;
+export default formBookingCostCalculationSlice.reducer;
