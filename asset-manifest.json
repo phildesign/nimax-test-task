@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/nimax-test-task/static/css/main.d74221a7.css",
+    "main.js": "/nimax-test-task/static/js/main.f44c5452.js",
+    "static/media/date-icon.svg": "/nimax-test-task/static/media/date-icon.ba53c9a1b8bbe7256b71.svg",
+    "static/media/success-icon.svg": "/nimax-test-task/static/media/success-icon.424d877eb483565a4f3dc76bd3be528b.svg",
+    "index.html": "/nimax-test-task/index.html",
+    "main.d74221a7.css.map": "/nimax-test-task/static/css/main.d74221a7.css.map",
+    "main.f44c5452.js.map": "/nimax-test-task/static/js/main.f44c5452.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d74221a7.css",
+    "static/js/main.f44c5452.js"
+  ]
+}
