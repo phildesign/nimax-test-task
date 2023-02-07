@@ -10,7 +10,7 @@ const FormBooking = (): JSX.Element => {
 	return (
 		<div className={styles.formBooking}>
 			<Routes>
-				<Route path="/" element={<CostCalculation />} />
+				<Route path="/nimax-test-task" element={<CostCalculation />} />
 				<Route path="/step2" element={<BuyerData />} />
 				<Route path="/step3" element={<ConfirmationOrder />} />
 				<Route path="/result" element={<Result />} />
