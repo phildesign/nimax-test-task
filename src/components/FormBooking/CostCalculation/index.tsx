@@ -70,6 +70,7 @@ const CostCalculation = (): JSX.Element => {
 	const numberOfAdultsTemp = watch('numberOfAdults');
 	const numberOfNightsTemp = watch('numberOfNights');
 	const amountOfChildrenTemp = watch('amountOfChildren');
+	const amountOfChildrenUntilFiveTemp = watch('amountOfChildrenUntilFive');
 	const typeRoomTemp = watch('typeRoom');
 	const insuranceTemp = watch('insurance', []);
 
@@ -101,7 +102,14 @@ const CostCalculation = (): JSX.Element => {
 		}
 
 		setTotalTemp(result);
-	}, [numberOfAdultsTemp, numberOfNightsTemp, amountOfChildrenTemp, typeRoomTemp, insuranceTemp]);
+	}, [
+		numberOfAdultsTemp,
+		numberOfNightsTemp,
+		amountOfChildrenTemp,
+		typeRoomTemp,
+		insuranceTemp,
+		amountOfChildrenUntilFiveTemp,
+	]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
@@ -154,7 +162,7 @@ const CostCalculation = (): JSX.Element => {
 							[styles.inputError]: errors.amountOfChildrenUntilFive?.type,
 						})}
 						min={0}
-						{...register('amountOfChildrenUntilFive', { max: numberOfAdults * 3 })}
+						{...register('amountOfChildrenUntilFive', { max: numberOfAdultsTemp * 3 })}
 					/>
 					<span className={styles.errorMessage}>
 						{errors.amountOfChildrenUntilFive?.type &&
