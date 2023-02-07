@@ -22,6 +22,8 @@ const BuyerData = (): JSX.Element => {
 		(state) => state.formBookingBuyerDataSlice,
 	);
 
+	const [isPhoneIncomplete, setPhoneIncomplete] = React.useState<boolean>(false);
+
 	const {
 		register,
 		handleSubmit,
@@ -52,7 +54,10 @@ const BuyerData = (): JSX.Element => {
 
 	const handleClickPrev = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
-		navigate('/nimax-test-task');
+	};
+
+	const checkNumbersMinLength = (e: { target: HTMLInputElement }, minLength: number) => {
+		setPhoneIncomplete(e.target.value.replace(/\D/g, '').length <= minLength);
 	};
 
 	return (
@@ -135,24 +140,24 @@ const BuyerData = (): JSX.Element => {
 				<div className={styles.inputWrapper}>
 					<InputMask
 						mask="+ 7 999 999 99-99"
-						type="tel"
 						id="phone"
 						placeholder="+ 7 999 123 45-67"
-						className={cn(styles.input, {
-							[styles.inputError]: errors.phone?.type,
-						})}
 						{...register('phone', {
 							required: true,
-							minLength: 10,
 							pattern: {
 								value: /[0-9]/i,
 								message: 'Возможен ввод только цифр',
 							},
 						})}
+						onInput={(e: { target: HTMLInputElement }) => checkNumbersMinLength(e, 10)}
+						className={cn(styles.input, {
+							[styles.inputError]: errors.phone?.type || isPhoneIncomplete,
+						})}
+						type="text"
 					/>
 					<span className={styles.errorMessage}>
 						{errors.phone?.type && validateErrors(errors.phone?.type)}
-						{errors.phone?.message}
+						{isPhoneIncomplete && 'Неккоректный формат телефона'}
 					</span>
 				</div>
 			</div>
