@@ -12,17 +12,28 @@ import {
 	choosePhone,
 	chooseSurname,
 } from '../../../redux/slices/formBookingBuyerDataSlice';
-import { useAppDispatch } from '../../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { validateErrors } from '../../../utils/validateErrors';
 
 import styles from '../FormBooking.module.css';
 
 const BuyerData = (): JSX.Element => {
+	const { surname, name, patronymic, phone, birthday } = useAppSelector(
+		(state) => state.formBookingBuyerDataSlice,
+	);
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<formBookingBuyerDataModel>({
+		defaultValues: {
+			surname,
+			name,
+			patronymic,
+			phone,
+			birthday,
+		},
 		mode: 'onChange',
 	});
 
@@ -122,18 +133,29 @@ const BuyerData = (): JSX.Element => {
 					Номер телефона
 				</label>
 				<div className={styles.inputWrapper}>
-					<InputMask
+					{/* <InputMask
+						mask="+ 7 999 999 99-99"
+						{...register('phone')}></InputMask> */}
+
+					<input
 						type="tel"
 						id="phone"
 						placeholder="+ 7 999 123 45-67"
-						mask="+ 7 999 999 99-99"
 						className={cn(styles.input, {
 							[styles.inputError]: errors.phone?.type,
 						})}
-						{...(register('phone'), { required: true, minLength: 10 })}
+						{...register('phone', {
+							required: true,
+							minLength: 10,
+							pattern: {
+								value: /[0-9]/i,
+								message: 'Возможен ввод только цифр',
+							},
+						})}
 					/>
 					<span className={styles.errorMessage}>
 						{errors.phone?.type && validateErrors(errors.phone?.type)}
+						{errors.phone?.message}
 					</span>
 				</div>
 			</div>

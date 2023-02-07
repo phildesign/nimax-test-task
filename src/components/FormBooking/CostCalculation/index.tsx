@@ -1,8 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import cn from 'classnames';
-import { useAppDispatch } from '../../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import {
 	chooseAmountOfChildren,
 	chooseAmountOfChildrenUntilFive,
@@ -20,6 +21,18 @@ import { ECO_PRICE, LUHURY_PRICE, STANDART_PRICE } from '../FormBookingConstants
 import styles from '../FormBooking.module.css';
 
 const CostCalculation = (): JSX.Element => {
+	const isMobile = useMediaQuery({ query: '(max-width: 580px)' });
+
+	const {
+		numberOfAdults,
+		amountOfChildren,
+		amountOfChildrenUntilFive,
+		typeRoom,
+		numberOfNights,
+		insurance,
+		total,
+	} = useAppSelector((state) => state.formBookingCostCalculationSlice);
+
 	const dispatch = useAppDispatch();
 
 	const {
@@ -29,12 +42,13 @@ const CostCalculation = (): JSX.Element => {
 		watch,
 	} = useForm<formBookingCostCalculationModel>({
 		defaultValues: {
-			numberOfAdults: 1,
-			amountOfChildren: 0,
-			amountOfChildrenUntilFive: 0,
-			numberOfNights: 1,
-			typeRoom: 'Эконом',
-			insurance: [],
+			numberOfAdults,
+			amountOfChildren,
+			amountOfChildrenUntilFive,
+			typeRoom,
+			numberOfNights,
+			insurance,
+			total,
 		},
 		mode: 'onChange',
 	});
@@ -48,44 +62,46 @@ const CostCalculation = (): JSX.Element => {
 		dispatch(chooseTypeRoom(data.typeRoom));
 		dispatch(chooseNumberOfNights(data.numberOfNights));
 		dispatch(chooseInsurance(data.insurance));
-		dispatch(setTotalPrice(total));
+		dispatch(setTotalPrice(totalTemp));
 
 		navigate('/step2');
 	};
 
-	const numberOfAdults = watch('numberOfAdults');
-	const numberOfNights = watch('numberOfNights');
-	const amountOfChildren = watch('amountOfChildren');
-	// const amountOfChildrenUntilFive = watch('amountOfChildrenUntilFive');
-	const typeRoom = watch('typeRoom');
-	const insurance = watch('insurance', []);
+	const numberOfAdultsTemp = watch('numberOfAdults');
+	const numberOfNightsTemp = watch('numberOfNights');
+	const amountOfChildrenTemp = watch('amountOfChildren');
+	const typeRoomTemp = watch('typeRoom');
+	const insuranceTemp = watch('insurance', []);
 
-	const [total, setTotal] = React.useState(0);
+	const [totalTemp, setTotalTemp] = React.useState(0);
 
 	React.useEffect(() => {
 		let result = 0;
 
-		switch (typeRoom) {
+		switch (typeRoomTemp) {
 			case 'Эконом':
-				result = numberOfAdults * numberOfNights * ECO_PRICE + (amountOfChildren * ECO_PRICE) / 2;
+				result =
+					numberOfAdultsTemp * numberOfNightsTemp * ECO_PRICE +
+					(amountOfChildrenTemp * ECO_PRICE) / 2;
 				break;
 			case 'Стандарт':
 				result =
-					numberOfAdults * numberOfNights * STANDART_PRICE +
-					(amountOfChildren * STANDART_PRICE) / 2;
+					numberOfAdultsTemp * numberOfNightsTemp * STANDART_PRICE +
+					(amountOfChildrenTemp * STANDART_PRICE) / 2;
 				break;
 			case 'Люкс':
 				result =
-					numberOfAdults * numberOfNights * LUHURY_PRICE + (amountOfChildren * LUHURY_PRICE) / 2;
+					numberOfAdultsTemp * numberOfNightsTemp * LUHURY_PRICE +
+					(amountOfChildrenTemp * LUHURY_PRICE) / 2;
 				break;
 		}
 
-		if (insurance.length) {
+		if (insuranceTemp.length) {
 			result += result * 0.1;
 		}
 
-		setTotal(result);
-	}, [numberOfAdults, numberOfNights, amountOfChildren, typeRoom, insurance]);
+		setTotalTemp(result);
+	}, [numberOfAdultsTemp, numberOfNightsTemp, amountOfChildrenTemp, typeRoomTemp, insuranceTemp]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
@@ -103,7 +119,6 @@ const CostCalculation = (): JSX.Element => {
 						className={cn(styles.input, {
 							[styles.inputError]: errors.numberOfAdults?.type,
 						})}
-						defaultValue={numberOfAdults}
 						min={1}
 						{...register('numberOfAdults', { required: true, min: 1 })}
 					/>
@@ -122,7 +137,6 @@ const CostCalculation = (): JSX.Element => {
 					type="number"
 					id="amountOfChildren"
 					className={styles.input}
-					defaultValue={amountOfChildren}
 					min={0}
 					{...register('amountOfChildren')}
 				/>
@@ -140,7 +154,7 @@ const CostCalculation = (): JSX.Element => {
 							[styles.inputError]: errors.amountOfChildrenUntilFive?.type,
 						})}
 						min={0}
-						{...register('amountOfChildrenUntilFive', { max: watch('numberOfAdults') * 3 })}
+						{...register('amountOfChildrenUntilFive', { max: numberOfAdults * 3 })}
 					/>
 					<span className={styles.errorMessage}>
 						{errors.amountOfChildrenUntilFive?.type &&
@@ -191,17 +205,18 @@ const CostCalculation = (): JSX.Element => {
 					</div>
 				</div>
 
-				<div className={styles.selectTypeRoomWrapper}>
-					<select
-						id="selectTypeRoom"
-						className={styles.selectTypeRoom}
-						defaultValue={typeRoom}
-						{...register('typeRoom', { required: true })}>
-						<option value="Эконом">Эконом</option>
-						<option value="Стандарт">Стандарт</option>
-						<option value="Люкс">Люкс</option>
-					</select>
-				</div>
+				{isMobile && (
+					<div className={styles.selectTypeRoomWrapper}>
+						<select
+							id="selectTypeRoom"
+							className={styles.selectTypeRoom}
+							{...register('typeRoom', { required: true })}>
+							<option value="Эконом">Эконом</option>
+							<option value="Стандарт">Стандарт</option>
+							<option value="Люкс">Люкс</option>
+						</select>
+					</div>
+				)}
 			</div>
 
 			<div className={styles.row}>
@@ -215,7 +230,6 @@ const CostCalculation = (): JSX.Element => {
 						className={cn(styles.input, {
 							[styles.inputError]: errors.numberOfNights?.type,
 						})}
-						defaultValue={numberOfNights}
 						min={1}
 						{...register('numberOfNights', { required: true, min: 1 })}
 					/>
@@ -239,24 +253,26 @@ const CostCalculation = (): JSX.Element => {
 					<label htmlFor="insurance" className={styles.labelInsuranceCheckbox}></label>
 				</div>
 
-				<div className={styles.inputToggleInsuranceWrapper}>
-					<label htmlFor="insuranceMobile" className={styles.inputToggleInsuranceLabel}>
-						<input
-							type="checkbox"
-							id="insuranceMobile"
-							className={styles.inputToggleInsurance}
-							{...register('insurance')}
-						/>
-						<div className={styles.inputToggleInsuranceInner}></div>
-						<div className={styles.inputToggleInsuranceBullet}></div>
-					</label>
-				</div>
+				{isMobile && (
+					<div className={styles.inputToggleInsuranceWrapper}>
+						<label htmlFor="insuranceMobile" className={styles.inputToggleInsuranceLabel}>
+							<input
+								type="checkbox"
+								id="insuranceMobile"
+								className={styles.inputToggleInsurance}
+								{...register('insurance')}
+							/>
+							<div className={styles.inputToggleInsuranceInner}></div>
+							<div className={styles.inputToggleInsuranceBullet}></div>
+						</label>
+					</div>
+				)}
 			</div>
 
 			<div className={cn(styles.row, styles.rowTotal)}>
 				<label className={styles.label}>Итого:</label>
 				<div className={styles.total}>
-					{total}
+					{totalTemp}
 					<span className={styles.rub}>₽</span>
 				</div>
 			</div>

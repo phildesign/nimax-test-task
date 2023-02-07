@@ -1,12 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import cn from 'classnames';
-import { useAppSelector } from '../../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { counterAdults, counterChildren } from '../../../utils/counterPeople';
+import { clearDataFormBookingBuyer } from '../../../redux/slices/formBookingBuyerDataSlice';
+import { clearDataFormBookingCostCalculation } from '../../../redux/slices/formBookingCostCalculationSlice';
 
 import styles from '../FormBooking.module.css';
 
 const ConfirmationOrder = (): JSX.Element => {
+	const state = useAppSelector((state) => state);
+
 	const { surname, name, patronymic, phone } = useAppSelector(
 		(state) => state.formBookingBuyerDataSlice,
 	);
@@ -25,11 +29,13 @@ const ConfirmationOrder = (): JSX.Element => {
 
 	const navigate = useNavigate();
 
-	const state = useAppSelector((state) => state);
+	const dispatch = useAppDispatch();
 
 	const onSubmit = () => {
 		setTimeout(() => alert(JSON.stringify(state, null, 2)), 1000); //fake send to server
 		setTimeout(() => navigate('/result'), 1000);
+		setTimeout(() => dispatch(clearDataFormBookingCostCalculation()), 1000);
+		setTimeout(() => dispatch(clearDataFormBookingBuyer()), 1000);
 	};
 
 	const handleClickPrev = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -53,7 +59,7 @@ const ConfirmationOrder = (): JSX.Element => {
 				<span>{counterChildren(amountOfChildren, 'afterFive')}</span>
 				<span>{counterChildren(amountOfChildrenUntilFive, 'beforeFive')}</span>
 			</div>
-			<div className={styles.text}>{insurance ? 'Страховка включена' : 'Без страховки'}</div>
+			<div className={styles.text}>{insurance.length ? 'Страховка включена' : 'Без страховки'}</div>
 			<div className={cn(styles.text, styles.textBottom)}>
 				К оплате
 				<span className={styles.price}>

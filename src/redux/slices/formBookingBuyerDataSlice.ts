@@ -29,11 +29,24 @@ export const formBookingBuyerDataSlice = createSlice({
 		chooseBirthday: (state, action) => {
 			state.birthday = action.payload;
 		},
+		clearDataFormBookingBuyer: (state) => {
+			state.surname = '';
+			state.name = '';
+			state.patronymic = '';
+			state.phone = '';
+			state.birthday = '';
+		},
 	},
 });
 
-export const { chooseSurname, chooseName, choosePatronymic, choosePhone, chooseBirthday } =
-	formBookingBuyerDataSlice.actions;
+export const {
+	chooseSurname,
+	chooseName,
+	choosePatronymic,
+	choosePhone,
+	chooseBirthday,
+	clearDataFormBookingBuyer,
+} = formBookingBuyerDataSlice.actions;
 
 export const formBookingBuyerSelector = (state: RootState) => state.formBookingBuyerDataSlice;
 

@@ -37,6 +37,15 @@ export const formBookingCostCalculationSlice = createSlice({
 		setTotalPrice: (state, action) => {
 			state.total = action.payload;
 		},
+		clearDataFormBookingCostCalculation: (state) => {
+			state.numberOfAdults = 1;
+			state.amountOfChildren = 0;
+			state.amountOfChildrenUntilFive = 0;
+			state.typeRoom = 'Эконом';
+			state.numberOfNights = 1;
+			state.insurance = [];
+			state.total = 0;
+		},
 	},
 });
 
@@ -48,6 +57,7 @@ export const {
 	chooseNumberOfNights,
 	chooseInsurance,
 	setTotalPrice,
+	clearDataFormBookingCostCalculation,
 } = formBookingCostCalculationSlice.actions;
 
 export const formBookingCostCalculationSelector = (state: RootState) =>

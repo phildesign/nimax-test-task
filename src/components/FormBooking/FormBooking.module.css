@@ -159,7 +159,6 @@
 }
 
 .selectTypeRoom {
-	display: none;
 	width: 100%;
 	font-family: 'Inter', sans-serif;
 	font-weight: 400;
@@ -170,12 +169,6 @@
 	border: 1px solid #e5e7eb;
 	border-radius: 4px;
 	padding: 6px 8px;
-}
-
-@media (max-width: 580px) {
-	.selectTypeRoom {
-		display: block;
-	}
 }
 
 .inputInsuranceCheckbox {
@@ -218,17 +211,12 @@
 	display: block;
 }
 
-.inputToggleInsuranceWrapper {
-	display: none;
-}
-
 @media (max-width: 580px) {
 	.inputInsuranceWrapper {
 		display: none;
 	}
 
 	.inputToggleInsuranceWrapper {
-		display: block;
 		margin-left: auto;
 	}
 }
