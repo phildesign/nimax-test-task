@@ -9,10 +9,10 @@ export const counterChildren = (count: number, type: string) => {
 		result = `, ${count} ребенок`;
 	}
 
-	if (type === 'afterFive' && count !== 0) {
+	if (type === 'afterFive' && count !== 0 && String(count) !== '') {
 		totalResult.push(`${result} от 5 до 12 лет`);
 	}
-	if (type === 'beforeFive' && count !== 0) {
+	if (type === 'beforeFive' && count !== 0 && String(count) !== '') {
 		totalResult.push(`${result} до 5 лет`);
 	}
 	return totalResult.join();

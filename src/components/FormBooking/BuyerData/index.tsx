@@ -49,11 +49,11 @@ const BuyerData = (): JSX.Element => {
 		dispatch(choosePatronymic(data.patronymic));
 		dispatch(choosePhone(data.phone));
 		dispatch(chooseBirthday(data.birthday));
-		navigate('/step3');
 	};
 
 	const handleClickPrev = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
+		navigate('/nimax-test-task/');
 	};
 
 	const checkNumbersMinLength = (e: { target: HTMLInputElement }, minLength: number) => {
@@ -170,6 +170,7 @@ const BuyerData = (): JSX.Element => {
 					<input
 						type="date"
 						id="birthday"
+						max="2023-01-07"
 						className={cn(styles.input, styles.inputDate, {
 							[styles.inputError]: errors.birthday?.type,
 						})}
