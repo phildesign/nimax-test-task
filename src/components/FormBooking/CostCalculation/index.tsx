@@ -64,7 +64,6 @@ const CostCalculation = (): JSX.Element => {
 		dispatch(chooseNumberOfNights(data.numberOfNights));
 		dispatch(chooseInsurance(data.insurance));
 		dispatch(setTotalPrice(totalTemp));
-
 		navigate('/step2');
 	};
 
@@ -113,12 +112,7 @@ const CostCalculation = (): JSX.Element => {
 	]);
 
 	return (
-		<form
-			onSubmit={handleSubmit(onSubmit)}
-			onChange={(e) => {
-				console.log(e);
-			}}
-			className={styles.formBookingStep}>
+		<form onSubmit={handleSubmit(onSubmit)} className={styles.formBookingStep}>
 			<h1 className={styles.title}>Бронирование номера</h1>
 			<h2 className={styles.subtitle}>Расчет стоимости</h2>
 

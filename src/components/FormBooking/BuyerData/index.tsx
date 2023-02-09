@@ -49,11 +49,12 @@ const BuyerData = (): JSX.Element => {
 		dispatch(choosePatronymic(data.patronymic));
 		dispatch(choosePhone(data.phone));
 		dispatch(chooseBirthday(data.birthday));
+		navigate('/step3');
 	};
 
 	const handleClickPrev = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault();
-		navigate('/nimax-test-task/');
+		navigate('/nimax-test-task');
 	};
 
 	const checkNumbersMinLength = (e: { target: HTMLInputElement }, minLength: number) => {
