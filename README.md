@@ -69,5 +69,6 @@
 - react-hook-form
 - react-responsive
 - react-router-dom
+- react-input-mask
 
 Ссылка на GitHub Pages - https://phildesign.github.io/nimax-test-task/
